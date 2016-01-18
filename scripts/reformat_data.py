@@ -73,12 +73,12 @@ def main():
     df = df.convert_objects(convert_numeric=True)
 
     if 0:
-        print df.columns.values
+        print(df.columns.values)
 
-        print df['Excess Readmission Ratio']
+        print(df['Excess Readmission Ratio'])
 
         groups = df.groupby('State')
-        print type(groups)
+        print(type(groups))
 
 
         import matplotlib.pyplot as plt
@@ -107,4 +107,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
