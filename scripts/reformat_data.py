@@ -27,11 +27,14 @@ def write_data(filename, df):
     # what?
 
 def main():
+    PLOT = 0
+    WRITE = 1
 
     # Filenames
     DIR_DATA = '../data/'
     DIR_DATA_PROD = '../data_products/'
     FILENAME_DATA = DIR_DATA + 'Hospital_Readmissions_Reduction_Program.csv'
+    FILENAME_REFORMATED = DIR_DATA + 'Reformatted_Hospital_Data.csv'
 
     # Hospital Name,
     # Provider Number,
@@ -65,14 +68,17 @@ def main():
                   #engine='c',
                     )
 
-    print('Columns and types:')
-    print(df.dtypes)
-
     # Attempt to coerce to numbers (including strings), with unconvertible
     # values becoming NaN.
     df = df.convert_objects(convert_numeric=True)
+    df["Start Date"] = pd.to_datetime(
+        df["Start Date"]
+        )
+    df["End Date"] = pd.to_datetime(
+        df["End Date"]
+        )
 
-    if 1:
+    if PLOT:
         import matplotlib.pyplot as plt
 
         # Plot
@@ -88,4 +94,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
