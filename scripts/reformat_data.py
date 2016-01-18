@@ -27,11 +27,14 @@ def write_data(filename, df):
     # what?
 
 def main():
+    PLOT = 0
+    WRITE = 1
 
     # Filenames
     DIR_DATA = '../data/'
     DIR_DATA_PROD = '../data_products/'
     FILENAME_DATA = DIR_DATA + 'Hospital_Readmissions_Reduction_Program.csv'
+    FILENAME_REFORMATED = DIR_DATA + 'Reformatted_Hospital_Data.csv'
 
     # Hospital Name,
     # Provider Number,
@@ -65,33 +68,31 @@ def main():
                   #engine='c',
                     )
 
-    print('Columns and types:')
-    print(df.dtypes)
-
     # Attempt to coerce to numbers (including strings), with unconvertible
     # values becoming NaN.
     df = df.convert_objects(convert_numeric=True)
+    df["Start Date"] = pd.to_datetime(
+        df["Start Date"]
+        )
+    df["End Date"] = pd.to_datetime(
+        df["End Date"]
+        )
 
-    if 0:
-        print(df.columns.values)
+    print('Columns and types:')
+    print(df.dtypes)
 
-        print(df['Excess Readmission Ratio'])
+    # Write the
+    if WRITE:
+        df.to_csv(
+            FILENAME_REFORMATED,
+            index=False,
+            encoding='utf-8',
+            date_format='%Y-%m-%dT%H:%M:%SZ'
+        )
 
-        groups = df.groupby('State')
-        print(type(groups))
 
-
-        import matplotlib.pyplot as plt
-
-        # Plot
-        fig, ax = plt.subplots()
-        ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
-        for name, group in groups:
-            ax.plot(group['State'], group['Excess Readmission Ratio'], marker='o', linestyle='', ms=12, label=name)
-        ax.legend()
-
-        plt.show()
-    else:
+    # Can plot, if desired. Set plot to 1
+    if PLOT:
         import matplotlib.pyplot as plt
 
         # Plot
