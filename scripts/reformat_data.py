@@ -72,26 +72,7 @@ def main():
     # values becoming NaN.
     df = df.convert_objects(convert_numeric=True)
 
-    if 0:
-        print df.columns.values
-
-        print df['Excess Readmission Ratio']
-
-        groups = df.groupby('State')
-        print type(groups)
-
-
-        import matplotlib.pyplot as plt
-
-        # Plot
-        fig, ax = plt.subplots()
-        ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
-        for name, group in groups:
-            ax.plot(group['State'], group['Excess Readmission Ratio'], marker='o', linestyle='', ms=12, label=name)
-        ax.legend()
-
-        plt.show()
-    else:
+    if 1:
         import matplotlib.pyplot as plt
 
         # Plot
