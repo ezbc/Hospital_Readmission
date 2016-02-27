@@ -78,6 +78,9 @@ def main():
         df["End Date"]
         )
 
+    # remove 'not-availables'
+    df.replace('Not Available', np.nan)
+
     if PLOT:
         import matplotlib.pyplot as plt
 
