@@ -79,7 +79,7 @@ def main():
         )
 
     # remove 'not-availables'
-    df.replace('Not Available', np.nan)
+    df = df.replace('Not Available', np.nan)
 
     if PLOT:
         import matplotlib.pyplot as plt
