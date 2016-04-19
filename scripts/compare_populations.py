@@ -84,7 +84,7 @@ def write_data(filename, df):
     # what?
 
 
-def plot_readmission_vs_population(df_hosp, df_pop, filename):
+def plot_readmission_vs_population(df_hosp, df_pop, filename, show=False):
 
     import matplotlib.pyplot as plt
     import us
@@ -122,7 +122,8 @@ def plot_readmission_vs_population(df_hosp, df_pop, filename):
     ax.legend()
 
     plt.savefig(filename, dpi=100)
-    plt.show()
+    if show:
+        plt.show()
 
 def main():
 
@@ -151,18 +152,21 @@ def main():
 
 
     if PLOT:
+        show = True
         import matplotlib.pyplot as plt
 
         plot_readmission_vs_population(df_hosp,
                                        df_pop,
-                                       FILENAME_PLOT_READ_VS_POP)
+                                       FILENAME_PLOT_READ_VS_POP,
+                                       show=show)
 
         # Plot Readmission ratio box plot with state
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(15,4))
         df_hosp.boxplot(column='Excess Readmission Ratio', by='State', ax=ax)
         ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
         plt.savefig(FILENAME_PLOT_READ_VS_STATE, dpi=100)
-        plt.show()
+        if show:
+            plt.show()
 
 
 if __name__ == '__main__':
