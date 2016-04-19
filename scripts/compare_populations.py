@@ -136,6 +136,7 @@ def main():
     FILENAME_DATA_HOSP = DIR_DATA + 'Hospital_Readmissions_Reduction_Program.csv'
     FILENAME_DATA_POP = DIR_DATA + 'NST-EST2015-alldata.csv'
     FILENAME_PLOT_READ_VS_POP = DIR_PLOTS + 'readmission_vs_population'
+    FILENAME_PLOT_READ_VS_STATE = DIR_PLOTS + 'readmission_vs_state'
 
     # Hospital Name,
     # Provider Number,
@@ -156,14 +157,11 @@ def main():
                                        df_pop,
                                        FILENAME_PLOT_READ_VS_POP)
 
-        # Plot
+        # Plot Readmission ratio box plot with state
         fig, ax = plt.subplots()
-
         df_hosp.boxplot(column='Excess Readmission Ratio', by='State', ax=ax)
-
         ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
-        ax.legend()
-
+        plt.savefig(FILENAME_PLOT_READ_VS_STATE, dpi=100)
         plt.show()
 
 
