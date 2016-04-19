@@ -108,10 +108,10 @@ def plot_readmission_vs_population(df_hosp, df_pop, filename):
         median = scipy.stats.nanmedian(df_hosp['Excess Readmission Ratio'][index].values)
         y[i] = median
 
-        ax.annotate(states[i],xy=(x[i]/1e6,y[i],), xycoords='data',)
+        #ax.annotate(states[i],xy=(x[i]/1e6,y[i],), xycoords='data',)
 
-    x = x / 1e6
-    #ax.scatter(x/1e6,y,)
+    #x = x / 1e6
+    ax.scatter(x/1e6,y,)
     #ax.margins(0.05) # Optional, just adds 5% padding to the autoscaling
     ax.set_xlabel('Population [1,000,000]')
     ax.set_ylabel('Excess Readmission Ratio')
