@@ -2,6 +2,7 @@
 
 import pandas as pd
 import numpy as np
+import os
 
 def plot_data(df):
 
@@ -27,7 +28,7 @@ def write_data(filename, df):
     # what?
 
 def main():
-    PLOT = 0
+    PLOT = 1
     WRITE = 1
 
     # Filenames
@@ -81,6 +82,17 @@ def main():
     # remove 'not-availables'
     df = df.replace('Not Available', np.nan)
 
+    df.to_csv(FILENAME_REFORMATED,
+                 sep=',',
+                 columns=['Hospital Name',
+                          'Provider Number',
+                          'Start Date',
+                          'End Date',],
+                 index=False,
+                 )
+
+    os.system('sudo cp ' + FILENAME_REFORMATED + ' /home/tmp/.')
+
     if PLOT:
         import matplotlib.pyplot as plt
 
@@ -97,3 +109,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
